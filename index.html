@@ -25,12 +25,12 @@ async function loadTemp() {
 
   const channelID = "3293235";
 
-  const url = `https://api.thingspeak.com/channels/${channelID}/fields/1/last.json`;
+  const url = `https://api.thingspeak.com/channels/${channelID}/fields/3/last.json`;
 
   const response = await fetch(url);
   const data = await response.json();
 
-  document.getElementById("temp").innerText = data.field1;
+  document.getElementById("temp").innerText = data.field3;
 }
 
 loadTemp();
