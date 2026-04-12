@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Live Temperatuur</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 60px;
+      background: #f2f2f2;
+    }
+    .box {
+      background: white;
+      display: inline-block;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    .temp {
+      font-size: 60px;
+      color: #0077ff;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h1>Live Temperatuur</h1>
+  <div class="temp" id="temp">...</div> °C
+</div>
+
+<script>
+  async function loadTemp() {
+    const channelID = "3293235";
+
+    const res = await fetch(
+      `https://api.thingspeak.com/channels/${channelID}/fields/1/last.json`
+    );
+
+    const data = await res.json();
+
+    document.getElementById("temp").innerText = data.field1;
+  }
+
+  loadTemp();
+  setInterval(loadTemp, 15000);
+</script>
+
+</body>
+</html>
