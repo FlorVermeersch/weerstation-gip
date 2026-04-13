@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Weerstation Live</title>
+  <title>Weerstation</title>
   <style>
     body {
       font-family: Arial;
-      text-align: center;
-      margin-top: 50px;
       background: #f2f2f2;
+      margin: 0;
+      padding: 20px;
     }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+
     .box {
       background: white;
       padding: 20px;
-      margin: 10px auto;
-      width: 300px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      text-align: center;
     }
+
     .value {
       font-size: 30px;
       color: blue;
@@ -25,14 +34,14 @@
 </head>
 <body>
 
-<h1>🌤️ Live Weerstation</h1>
-
-<div class="box">UV: <div class="value" id="uv">...</div></div>
-<div class="box">Licht: <div class="value" id="licht">...</div></div>
-<div class="box">Temperatuur: <div class="value" id="temp">...</div> °C</div>
-<div class="box">Luchtvochtigheid: <div class="value" id="hum">...</div> %</div>
-<div class="box">Luchtdruk: <div class="value" id="druk">...</div> hPa</div>
-<div class="box">Windrichting: <div class="value" id="wind">...</div></div>
+<div class="container">
+  <div class="box">UV<br><div class="value" id="uv">...</div></div>
+  <div class="box">Licht<br><div class="value" id="licht">...</div></div>
+  <div class="box">Temperatuur<br><div class="value" id="temp">...</div> °C</div>
+  <div class="box">Luchtvochtigheid<br><div class="value" id="hum">...</div> %</div>
+  <div class="box">Luchtdruk<br><div class="value" id="druk">...</div> hPa</div>
+  <div class="box">Windrichting<br><div class="value" id="wind">...</div></div>
+</div>
 
 <script>
 async function loadData() {
