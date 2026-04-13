@@ -1,40 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Live Temperatuur</title>
+  <title>Weerstation Live</title>
   <style>
     body {
       font-family: Arial;
       text-align: center;
-      margin-top: 100px;
+      margin-top: 50px;
+      background: #f2f2f2;
     }
-    .temp {
-      font-size: 80px;
+    .box {
+      background: white;
+      padding: 20px;
+      margin: 10px auto;
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    .value {
+      font-size: 30px;
       color: blue;
     }
   </style>
 </head>
 <body>
 
-<h1>🌡️ Live Temperatuur</h1>
+<h1>🌤️ Live Weerstation</h1>
 
-<div class="temp" id="temp">...</div> °C
+<div class="box">UV: <div class="value" id="uv">...</div></div>
+<div class="box">Licht: <div class="value" id="licht">...</div></div>
+<div class="box">Temperatuur: <div class="value" id="temp">...</div> °C</div>
+<div class="box">Luchtvochtigheid: <div class="value" id="hum">...</div> %</div>
+<div class="box">Luchtdruk: <div class="value" id="druk">...</div> hPa</div>
+<div class="box">Windrichting: <div class="value" id="wind">...</div></div>
 
 <script>
-async function loadTemp() {
+async function loadData() {
 
-  const channelID = "3293235";
+  const channelID = "JOUW_CHANNEL_ID";
 
-  const url = `https://api.thingspeak.com/channels/${channelID}/fields/1/last.json`;
+  const url = `https://api.thingspeak.com/channels/${channelID}/feeds/last.json?nocache=${Date.now()}`;
 
-  const response = await fetch(url);
-  const data = await response.json();
+  const res = await fetch(url);
+  const data = await res.json();
 
-  document.getElementById("temp").innerText = data.field1;
+  document.getElementById("uv").innerText = data.field1;
+  document.getElementById("licht").innerText = data.field2;
+  document.getElementById("temp").innerText = data.field3;
+  document.getElementById("hum").innerText = data.field4;
+  document.getElementById("druk").innerText = data.field5;
+  document.getElementById("wind").innerText = data.field6;
 }
 
-loadTemp();
-setInterval(loadTemp, 15000);
+loadData();
+setInterval(loadData, 15000);
 </script>
 
 </body>
