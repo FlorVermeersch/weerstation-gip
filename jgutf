@@ -1,50 +1,86 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Live Temperatuur</title>
+  <title>Weerstation</title>
+
   <style>
     body {
       font-family: Arial;
+      background: #e6f2ff;
+      margin: 0;
+      padding: 20px;
       text-align: center;
-      margin-top: 60px;
-      background: #f2f2f2;
     }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
     .box {
       background: white;
-      display: inline-block;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
-    .temp {
-      font-size: 60px;
-      color: #0077ff;
+
+    iframe {
+      width: 100%;
+      height: 260px;
+      border: none;
+    }
+
+    .titel {
+      font-weight: bold;
+      margin-bottom: 5px;
     }
   </style>
 </head>
+
 <body>
 
-<div class="box">
-  <h1>Live Temperatuur</h1>
-  <div class="temp" id="temp">...</div> °C
+<h1>Live Weerstation</h1>
+
+<div class="container">
+
+  <div class="box">
+    <div class="titel">UV</div>
+    <iframe src="https://thingspeak.com/channels/3293235/charts/1?dynamic=true&results=60&update=15"></iframe>
+  </div>
+
+  <div class="box">
+    <div class="titel">Licht</div>
+    <iframe src="https://thingspeak.com/channels/3293235/charts/2?dynamic=true&results=60&update=15"></iframe>
+  </div>
+
+  <div class="box">
+    <div class="titel">Temperatuur</div>
+    <iframe src="https://thingspeak.com/channels/3293235/charts/3?dynamic=true&results=60&update=15"></iframe>
+  </div>
+
+  <div class="box">
+    <div class="titel">Luchtvochtigheid</div>
+    <iframe src="https://thingspeak.com/channels/3293235/charts/4?dynamic=true&results=60&update=15"></iframe>
+  </div>
+
+  <div class="box">
+    <div class="titel">Luchtdruk</div>
+    <iframe src="https://thingspeak.com/channels/3293235/charts/5?dynamic=true&results=60&update=15"></iframe>
+  </div>
+
+  <div class="box">
+    <div class="titel">Windrichting</div>
+    <iframe src="https://thingspeak.com/channels/3293235/charts/6?dynamic=true&results=60&update=15"></iframe>
+  </div>
+
 </div>
-
-<script>
-  async function loadTemp() {
-    const channelID = "3293235";
-
-    const res = await fetch(
-      `https://api.thingspeak.com/channels/${channelID}/fields/1/last.json`
-    );
-
-    const data = await res.json();
-
-    document.getElementById("temp").innerText = data.field1;
-  }
-
-  loadTemp();
-  setInterval(loadTemp, 15000);
-</script>
 
 </body>
 </html>
