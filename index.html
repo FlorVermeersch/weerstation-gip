@@ -8,11 +8,17 @@
       background: #65AAE6;
       margin: 0;
       padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: white;
+      margin-bottom: 20px;
     }
 
     .container {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
       max-width: 700px;
       margin: auto;
@@ -21,28 +27,34 @@
     .box {
       background: white;
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .label {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #333;
     }
 
     .value {
-      font-size: 30px;
-      color: blue;
+      font-size: 32px;
+      color: #0077ff;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
-<h1>Live Waarden</h1>
+<h1>🌤️ Live Waarden</h1>
 
 <div class="container">
-  <div class="box">UV<br><div class="value" id="uv">...</div></div>
-  <div class="box">Licht<br><div class="value" id="licht">...</div></div>
-  <div class="box">Temperatuur<br><div class="value" id="temp">...</div> °C</div>
-  <div class="box">Luchtvochtigheid<br><div class="value" id="hum">...</div> %</div>
-  <div class="box">Luchtdruk<br><div class="value" id="druk">...</div> hPa</div>
-  <div class="box">Windrichting<br><div class="value" id="wind">...</div></div>
+  <div class="box"><div class="label">UV</div><div class="value" id="uv">...</div></div>
+  <div class="box"><div class="label">Licht</div><div class="value" id="licht">...</div></div>
+  <div class="box"><div class="label">Temperatuur</div><div class="value" id="temp">...</div> °C</div>
+  <div class="box"><div class="label">Luchtvochtigheid</div><div class="value" id="hum">...</div> %</div>
+  <div class="box"><div class="label">Luchtdruk</div><div class="value" id="druk">...</div> hPa</div>
+  <div class="box"><div class="label">Windrichting</div><div class="value" id="wind">...</div></div>
 </div>
 
 <script>
