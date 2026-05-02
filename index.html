@@ -20,7 +20,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
-      max-width: 700px;
+      max-width: 900px;
       margin: auto;
     }
 
@@ -46,33 +46,38 @@
 </head>
 <body>
 
-<h1>Live Waarden</h1>
+<h1>Live Weerstation</h1>
 
 <div class="container">
-  <div class="box"><div class="label">UV</div><div class="value" id="uv">...</div></div>
-  <div class="box"><div class="label">Licht</div><div class="value" id="licht">...</div></div>
   <div class="box"><div class="label">Temperatuur</div><div class="value" id="temp">...</div> °C</div>
-  <div class="box"><div class="label">Luchtvochtigheid</div><div class="value" id="hum">...</div> %</div>
+  <div class="box"><div class="label">Neerslag</div><div class="value" id="rain">...</div> mm</div>
   <div class="box"><div class="label">Luchtdruk</div><div class="value" id="druk">...</div> hPa</div>
-  <div class="box"><div class="label">Windrichting</div><div class="value" id="wind">...</div></div>
+  <div class="box"><div class="label">Luchtvochtigheid</div><div class="value" id="hum">...</div> %</div>
+  <div class="box"><div class="label">Windrichting</div><div class="value" id="winddir">...</div></div>
+  <div class="box"><div class="label">Windsnelheid</div><div class="value" id="windspeed">...</div> km/h</div>
+  <div class="box"><div class="label">UV</div><div class="value" id="uv">...</div></div>
+  <div class="box"><div class="label">Lichtsterkte</div><div class="value" id="light">...</div></div>
 </div>
 
 <script>
 async function loadData() {
 
   const channelID = "3293235";
+  const apiKey = "I6LPXW7JW4PHDEQE";
 
-  const url = `https://api.thingspeak.com/channels/${channelID}/feeds/last.json?nocache=${Date.now()}`;
+  const url = `https://api.thingspeak.com/channels/${channelID}/feeds/last.json?api_key=${apiKey}&nocache=${Date.now()}`;
 
   const res = await fetch(url);
   const data = await res.json();
 
-  document.getElementById("uv").innerText = data.field1;
-  document.getElementById("licht").innerText = data.field2;
-  document.getElementById("temp").innerText = data.field3;
+  document.getElementById("temp").innerText = data.field1;
+  document.getElementById("rain").innerText = data.field2;
+  document.getElementById("druk").innerText = data.field3;
   document.getElementById("hum").innerText = data.field4;
-  document.getElementById("druk").innerText = data.field5;
-  document.getElementById("wind").innerText = data.field6;
+  document.getElementById("winddir").innerText = data.field5;
+  document.getElementById("windspeed").innerText = data.field6;
+  document.getElementById("uv").innerText = data.field7;
+  document.getElementById("light").innerText = data.field8;
 }
 
 loadData();
